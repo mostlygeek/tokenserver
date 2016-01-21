@@ -28,9 +28,10 @@ test:
 
 deployment:
   hub_latest:
-    branch: master
+    branch: /.*/
     commands:
-      - "docker tag app:build ${DOCKERHUB_REPO}:latest"
+      - "echo ${DOCKERHUB_REPO}:${CIRCLE_TAG}"
+      - "docker tag app:build ${DOCKERHUB_REPO}:{$CIRCLE_BRANCH}"
       - "docker push ${DOCKERHUB_REPO}:latest"
 
   hub_releases:
