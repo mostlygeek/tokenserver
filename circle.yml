@@ -1,9 +1,9 @@
 # These environment variables must be set in CircleCI UI
 #
 # DOCKERHUB_REPO    - which docker hub repo to push to
-# DOCKERHUB_EMAIL   - login info for docker hub
-# DOCKERHUB_USER
-# DOCKERHUB_PASS
+# DOCKER_EMAIL   - login info for docker hub
+# DOCKER_USER
+# DOCKER_PASS
 #
 machine:
   services:
@@ -14,6 +14,7 @@ dependencies:
     - docker info
     - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
     - docker build -t app:build .
+    - [ ! -z $DOCKERHUB_REPO ]
 
 test:
   override:
