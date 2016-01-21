@@ -1,6 +1,6 @@
 # These environment variables must be set in CircleCI UI
 #
-# DOCKERHUB_REPO - docker hub repo, format: docker.io/<username>/<repo>
+# DOCKERHUB_REPO - docker hub repo, format: <username>/<repo>
 # DOCKER_EMAIL   - login info for docker hub
 # DOCKER_USER
 # DOCKER_PASS
@@ -33,7 +33,7 @@ deployment:
       - "echo ${DOCKERHUB_REPO}:${CIRCLE_BRANCH}"
       - "docker tag app:build ${DOCKERHUB_REPO}:${CIRCLE_BRANCH}"
       - "docker images"
-        #- "docker push ${DOCKERHUB_REPO}:"
+      - "docker push ${DOCKERHUB_REPO}:${CIRCLE_BRANCH}"
 
   hub_releases:
     # push semver based releases
