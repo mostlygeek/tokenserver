@@ -1,6 +1,6 @@
 # These environment variables must be set in CircleCI UI
 #
-# DOCKERHUB_REPO    - which docker hub repo to push to
+# DOCKERHUB_REPO - docker hub repo, format: docker.io/<username>/<repo>
 # DOCKER_EMAIL   - login info for docker hub
 # DOCKER_USER
 # DOCKER_PASS
@@ -18,7 +18,7 @@ dependencies:
     - "[ ! -z $DOCKERHUB_REPO ]"
 
     # build the container, use circleci's docker cache workaround
-    - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
+    - if [[ -e ~/docker/image.tar ]]; then echo "Loading image.tar"; docker load -i ~/docker/image.tar; fi
     - docker build -t app:build .
     - mkdir -p ~/docker; docker save app:build > ~/docker/image.tar
 
