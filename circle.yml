@@ -34,7 +34,7 @@ deployment:
       - docker push $DOCKERHUB_REPO:latest
   hub_releases:
     # push semver based releases
-    tag: /[0-9]+(\.[0-9]+)*/
+    tag: /.*/
     commands:
       - docker tag app:build $DOCKERHUB_REPO:$CIRCLE_TAG 
       - docker push $DOCKERHUB_REPO:latest
