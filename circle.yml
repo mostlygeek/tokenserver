@@ -10,11 +10,17 @@ machine:
     - docker
 
 dependencies:
+  cache_directories:
+    - "~/docker"
   override:
     - docker info
     - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
     - "[ ! -z $DOCKERHUB_REPO ]"
+
+    # build the container, use circleci's docker cache workaround
+    - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
     - docker build -t app:build .
+    - mkdir -p ~/docker; docker save app:build > ~/docker/image.tar
 
 test:
   override:
