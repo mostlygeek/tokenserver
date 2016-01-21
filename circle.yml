@@ -13,8 +13,8 @@ dependencies:
   override:
     - docker info
     - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-    - docker build -t app:build .
     - "[ ! -z $DOCKERHUB_REPO ]"
+    - docker build -t app:build .
 
 test:
   override:
