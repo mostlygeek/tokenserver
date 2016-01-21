@@ -30,11 +30,11 @@ deployment:
   hub_latest:
     branch: master
     commands:
-      - docker tag app:build ${DOCKERHUB_REPO}:latest 
-      - docker push ${DOCKERHUB_REPO}:latest
+      - "docker tag app:build ${DOCKERHUB_REPO}:latest"
+      - "docker push ${DOCKERHUB_REPO}:latest"
   hub_releases:
     # push semver based releases
     tag: /.*/
     commands:
-      - docker tag app:build ${DOCKERHUB_REPO}:${CIRCLE_TAG}
-      - docker push ${DOCKERHUB_REPO}:latest
+      - "docker tag app:build ${DOCKERHUB_REPO}:${CIRCLE_TAG}"
+      - "docker push ${DOCKERHUB_REPO}:${CIRCLE_TAG}"
