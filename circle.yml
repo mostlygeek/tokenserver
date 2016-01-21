@@ -30,9 +30,10 @@ deployment:
   hub_latest:
     branch: /.*/
     commands:
-      - "echo ${DOCKERHUB_REPO}:${CIRCLE_TAG}"
-      - "docker tag app:build ${DOCKERHUB_REPO}:{$CIRCLE_BRANCH}"
-      - "docker push ${DOCKERHUB_REPO}:latest"
+      - "echo ${DOCKERHUB_REPO}:${CIRCLE_BRANCH}"
+      - "docker tag app:build ${DOCKERHUB_REPO}:${CIRCLE_BRANCH}"
+      - "docker images"
+        #- "docker push ${DOCKERHUB_REPO}:"
 
   hub_releases:
     # push semver based releases
@@ -40,4 +41,5 @@ deployment:
     commands:
       - "echo ${DOCKERHUB_REPO}:${CIRCLE_TAG}"
       - "docker tag app:build ${DOCKERHUB_REPO}:${CIRCLE_TAG}"
-      - "docker push ${DOCKERHUB_REPO}:${CIRCLE_TAG}"
+      - "docker images"
+        #- "docker push ${DOCKERHUB_REPO}:${CIRCLE_TAG}"
