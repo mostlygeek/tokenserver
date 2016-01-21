@@ -27,19 +27,16 @@ test:
     - docker run app:build /bin/sh -c 'flake8 --ignore=E402 tokenserver && nosetests tokenserver/tests'
 
 deployment:
-  envs:
-    commands: 
-      # see why it is not tagging ..
-      - "echo ${DOCKERHUB_REPO}:${CIRCLE_TAG}"
-        
   hub_latest:
     branch: master
     commands:
       - "docker tag app:build ${DOCKERHUB_REPO}:latest"
       - "docker push ${DOCKERHUB_REPO}:latest"
+
   hub_releases:
     # push semver based releases
     tag: /.*/
     commands:
+      - "echo ${DOCKERHUB_REPO}:${CIRCLE_TAG}"
       - "docker tag app:build ${DOCKERHUB_REPO}:${CIRCLE_TAG}"
       - "docker push ${DOCKERHUB_REPO}:${CIRCLE_TAG}"
